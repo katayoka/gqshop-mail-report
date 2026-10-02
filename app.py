@@ -390,10 +390,16 @@ def main():
     st.dataframe(display_df, use_container_width=True, hide_index=True)
 
     st.subheader("④ 通常キャンペーン")
-    st.dataframe(normal_df, use_container_width=True, hide_index=True) if not normal_df.empty else st.info("該当データなし")
+    if not normal_df.empty:
+        st.dataframe(normal_df, use_container_width=True, hide_index=True)
+    else:
+        st.info("該当データなし")
 
     st.subheader("⑤ 自動配信系キャンペーン")
-    st.dataframe(auto_df, use_container_width=True, hide_index=True) if not auto_df.empty else st.info("該当データなし")
+    if not auto_df.empty:
+        st.dataframe(auto_df, use_container_width=True, hide_index=True)
+    else:
+        st.info("該当データなし")
 
     st.subheader("⑥ ダウンロード")
     dl_cols = st.columns(5)
