@@ -413,5 +413,4 @@ def main():
         st.download_button("📊 Excelレポート (.xlsx)", excel_bytes, "campaign_report.xlsx",
                            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 
-if __name__ == "__main__":
-    main()
+main()
