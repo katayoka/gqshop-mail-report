@@ -53,25 +53,40 @@ CATEGORY_COLORS = {
 # ============================================================
 
 def clean_money(v):
-    if not v or str(v).strip() in ("—", "-", ""):
+    if v is None:
         return 0.0
-    return float(re.sub(r"[￥¥,\s]", "", str(v).strip()) or 0)
+    s = str(v).strip()
+    if s in ("—", "-", "", "0.00", "0"):
+        return 0.0
+    cleaned = re.sub(r"[￥¥,\s]", "", s)
+    try:
+        return float(cleaned) if cleaned else 0.0
+    except ValueError:
+        return 0.0
 
 
 def clean_percent(v):
-    if not v or str(v).strip() in ("—", "-", ""):
+    if v is None:
         return 0.0
+    s = str(v).strip()
+    if s in ("—", "-", ""):
+        return 0.0
+    cleaned = re.sub(r"[％%\s]", "", s)
     try:
-        return float(re.sub(r"[％%\s]", "", str(v).strip())) / 100.0
+        return float(cleaned) / 100.0 if cleaned else 0.0
     except ValueError:
         return 0.0
 
 
 def clean_number(v):
-    if not v or str(v).strip() in ("—", "-", ""):
+    if v is None:
         return 0.0
+    s = str(v).strip()
+    if s in ("—", "-", ""):
+        return 0.0
+    cleaned = re.sub(r"[,\s]", "", s)
     try:
-        return float(re.sub(r"[,\s]", "", str(v).strip()))
+        return float(cleaned) if cleaned else 0.0
     except ValueError:
         return 0.0
 
